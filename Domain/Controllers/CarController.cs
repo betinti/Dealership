@@ -34,9 +34,17 @@ namespace Domain.Controllers
         public IActionResult GetByMileage(double mileage)
             => Ok(_carService.GetByMileage(mileage));
 
+        [HttpGet("getByMileageRange/{startMileage}/{endMileage}")]
+        public IActionResult GetByMileageRange(double startMileage, double endMileage)
+            => Ok(_carService.GetByMileageRange(startMileage, endMileage));
+
         [HttpGet("getBySistemVersion/{sistemVersion}")]
         public IActionResult GetBySistemVersion(int sistemVersion)
             => Ok(_carService.GetBySistemVersion(sistemVersion));
+
+        [HttpGet("getBySistemVersionRange/{startSistemVersion}/{endSistemVersion}")]
+        public IActionResult GetBySistemVersionRange(int startSistemVersion, int endSistemVersion)
+            => Ok(_carService.GetBySistemVersionRange(startSistemVersion, endSistemVersion));
 
 
         [HttpPut]

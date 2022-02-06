@@ -16,5 +16,7 @@ namespace Domain.Enumerations
         ParseError,
         [Description("FErro ao deletar")]
         CantDelete,
+        [Description("FParametros inconsistentes")]
+        ParameterError,
     }
 }

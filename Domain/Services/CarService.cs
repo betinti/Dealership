@@ -25,6 +25,20 @@ namespace Domain.Services
             return cars;
         }
 
+        public List<Car> GetByMileageRange(double startMiliage, double endMiliage)
+        {
+
+            if (startMiliage > endMiliage)
+                throw new BaseException(ErrorType.ParameterError);
+
+            var cars = _carRepository.GetByMileageRange(startMiliage, endMiliage).ToList();
+
+            if (cars.Count <= 0)
+                throw new BaseException(ErrorType.AnyFound);
+
+            return cars;
+        }
+
         public List<Car> GetBySistemVersion(int sistemVersion)
         {
             var cars = _carRepository.GetBySistemVersion(sistemVersion).ToList();
@@ -35,5 +49,17 @@ namespace Domain.Services
             return cars;
         }
 
+        public List<Car> GetBySistemVersionRange(int startSistemVersion, int endSistemVersion)
+        {
+            if (startSistemVersion > endSistemVersion)
+                throw new BaseException(ErrorType.ParameterError);
+
+            var cars = _carRepository.GetBySistemVersionRange(startSistemVersion, endSistemVersion).ToList();
+
+            if (cars.Count <= 0)
+                throw new BaseException(ErrorType.AnyFound);
+
+            return cars;
+        }
     }
 }
