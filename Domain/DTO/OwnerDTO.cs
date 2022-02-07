@@ -1,4 +1,6 @@
 using System.Linq;
+using Domain.Enumerations;
+using Domain.Exception;
 using Domain.Models;
 
 namespace Domain.DTO
@@ -13,9 +15,16 @@ namespace Domain.DTO
             if (model == null)
                 return null;
 
-            this.Id = model.Id;
-            this.CNH = model.CNH;
-            this.User = new UserDTO().FromModel(model.User);
+            try
+            {
+                this.Id = model.Id;
+                this.CNH = model.CNH;
+                this.User = new UserDTO().FromModel(model.User);
+            }
+            catch (ApplicationException e)
+            {
+                throw new BaseException(ErrorType.ParseError, e);
+            }
 
             return this;
         }

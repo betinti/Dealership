@@ -1,3 +1,5 @@
+using Domain.Enumerations;
+using Domain.Exception;
 using Domain.Models;
 
 namespace Domain.DTO
@@ -19,16 +21,23 @@ namespace Domain.DTO
             if (model == null)
                 return null;
 
-            this.Id = model.Id;
-            this.Brand = model.Brand;
-            this.ModelYear = model.ModelYear;
-            this.ManufactureYear = model.ManufactureYear;
-            this.ModelDescription = model.ModelDescription;
-            this.Engine = model.Engine;
-            this.GearsCount = model?.GearsCount;
-            this.PassagersCount = model?.PassagersCount;
-            this.HorsesPower = model?.HorsesPower;
-            this.GrossWeight = model?.GrossWeight;
+            try
+            {
+                this.Id = model.Id;
+                this.Brand = model.Brand;
+                this.ModelYear = model.ModelYear;
+                this.ManufactureYear = model.ManufactureYear;
+                this.ModelDescription = model.ModelDescription;
+                this.Engine = model.Engine;
+                this.GearsCount = model?.GearsCount;
+                this.PassagersCount = model?.PassagersCount;
+                this.HorsesPower = model?.HorsesPower;
+                this.GrossWeight = model?.GrossWeight;
+            }
+            catch (ApplicationException e)
+            {
+                throw new BaseException(ErrorType.ParseError, e);
+            }
 
             return this;
         }

@@ -1,3 +1,5 @@
+using Domain.Enumerations;
+using Domain.Exception;
 using Domain.Models;
 
 namespace Domain.DTO
@@ -29,17 +31,24 @@ namespace Domain.DTO
             if (model == null)
                 return null;
 
-            this.Id = model.Id;
-            this.Chassis = model.Chassis;
-            this.Model = new ModelDTO().FromModel(model.Model);
-            this.Color = model.Color;
-            this.Value = model.Value;
-            this.Mileage = model.Mileage;
-            this.Accessory = new AccessoryDTO().FromModel(model.Accessory);
-            this.SistemVersion = model.SistemVersion;
-            this.Owner = new OwnerDTO().FromModel(model.Owner);
-            this.LicensePlate = model.LicensePlate;
-            this.Renavam = model.Renavam;
+            try
+            {
+                this.Id = model.Id;
+                this.Chassis = model.Chassis;
+                this.Model = new ModelDTO().FromModel(model.Model);
+                this.Color = model.Color;
+                this.Value = model.Value;
+                this.Mileage = model.Mileage;
+                this.Accessory = new AccessoryDTO().FromModel(model.Accessory);
+                this.SistemVersion = model.SistemVersion;
+                this.Owner = new OwnerDTO().FromModel(model.Owner);
+                this.LicensePlate = model.LicensePlate;
+                this.Renavam = model.Renavam;
+            }
+            catch (ApplicationException e)
+            {
+                throw new BaseException(ErrorType.ParseError, e);
+            }
 
             return this;
         }

@@ -1,5 +1,7 @@
 
 
+using Domain.Enumerations;
+using Domain.Exception;
 using Domain.Models;
 
 namespace Domain.DTO
@@ -15,10 +17,17 @@ namespace Domain.DTO
             if (model == null)
                 return null;
 
-            this.Id = model.Id;
-            this.Value = model.Value;
-            this.Name = model.Name;
-            this.Description = model.Description;
+            try
+            {
+                this.Id = model.Id;
+                this.Value = model.Value;
+                this.Name = model.Name;
+                this.Description = model.Description;
+            }
+            catch (ApplicationException e)
+            {
+                throw new BaseException(ErrorType.ParseError, e);
+            }
 
             return this;
         }

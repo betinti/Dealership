@@ -1,3 +1,5 @@
+using Domain.Enumerations;
+using Domain.Exception;
 using Domain.Models;
 
 namespace Domain.DTO
@@ -18,14 +20,21 @@ namespace Domain.DTO
             if (model == null)
                 return null;
 
-            this.Id = model.Id;
-            this.Street = model.Street;
-            this.City = model.City;
-            this.UF = model.UF;
-            this.CEP = model.CEP;
-            this.Number = model.Number;
-            this.Complement = model.Complement;
-            this.Reference = model.Reference;
+            try
+            {
+                this.Id = model.Id;
+                this.Street = model.Street;
+                this.City = model.City;
+                this.UF = model.UF;
+                this.CEP = model.CEP;
+                this.Number = model.Number;
+                this.Complement = model.Complement;
+                this.Reference = model.Reference;
+            }
+            catch (ApplicationException e)
+            {
+                throw new BaseException(ErrorType.ParseError, e);
+            }
 
             return this;
         }

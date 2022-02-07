@@ -1,3 +1,5 @@
+using Domain.Enumerations;
+using Domain.Exception;
 using Domain.Models;
 
 namespace Domain.DTO
@@ -18,15 +20,22 @@ namespace Domain.DTO
             if (model == null)
                 return null;
 
-            this.Id = model.Id;
-            this.Address = new AddressDTO().FromModel(model.Address);
-            this.Name = model.Name;
-            this.Email = model.Email;
-            this.Age = model.Age;
-            this.Phone = model.Phone;
-            this.DDD = model.DDD;
-            this.CpfCnpj = model.CpfCnpj;
-            this.BirthDate = model.BirthDate;
+            try
+            {
+                this.Id = model.Id;
+                this.Address = new AddressDTO().FromModel(model.Address);
+                this.Name = model.Name;
+                this.Email = model.Email;
+                this.Age = model.Age;
+                this.Phone = model.Phone;
+                this.DDD = model.DDD;
+                this.CpfCnpj = model.CpfCnpj;
+                this.BirthDate = model.BirthDate;
+            }
+            catch (ApplicationException e)
+            {
+                throw new BaseException(ErrorType.ParseError, e);
+            }
 
             return this;
         }

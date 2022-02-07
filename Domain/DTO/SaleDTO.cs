@@ -1,3 +1,5 @@
+using Domain.Enumerations;
+using Domain.Exception;
 using Domain.Models;
 
 namespace Domain.DTO
@@ -15,12 +17,19 @@ namespace Domain.DTO
             if (model == null)
                 return null;
 
-            this.Id = model.Id;
-            this.Car = new CarDTO().FromModel(model.Car);
-            this.Seller = new SellerDTO().FromModel(model.Seller);
-            this.Owner = new OwnerDTO().FromModel(model.Owner);
-            this.Price = model.Price;
-            this.CommissionPercentage = model.CommissionPercentage;
+            try
+            {
+                this.Id = model.Id;
+                this.Car = new CarDTO().FromModel(model.Car);
+                this.Seller = new SellerDTO().FromModel(model.Seller);
+                this.Owner = new OwnerDTO().FromModel(model.Owner);
+                this.Price = model.Price;
+                this.CommissionPercentage = model.CommissionPercentage;
+            }
+            catch (ApplicationException e)
+            {
+                throw new BaseException(ErrorType.ParseError, e);
+            }
 
             return this;
         }

@@ -2,6 +2,7 @@
 using Domain.Interfaces.Services;
 using Domain.Enumerations;
 using Domain.Exception;
+using System.Text;
 
 namespace Domain.Services
 {
@@ -14,21 +15,28 @@ namespace Domain.Services
         private string getDaultMessage()
             => $"ERROR>>[{DateTime.Now.ToLongDateString()}]";
 
-        private void handleFile(string msg)
+        private void writeFile(string msg)
         {
             StreamWriter erros = new StreamWriter(conectString, addErro);
             erros.WriteLine(msg);
             erros.Close();
         }
 
+        // private string readFile()
+        // {
+        //     string file = File.ReadAllText(conectString, Encoding.UTF8);
+
+        //     System.Console.WriteLine(file);
+        // }
+
         public void logError(string error)
-            => handleFile($"{getDaultMessage()}<< {error}");
+            => writeFile($"{getDaultMessage()}<< {error}");
 
         public void logError(BaseException baseException)
-            => handleFile($"{getDaultMessage()}<< {baseException.Message} -- {baseException.Exception?.Message}");
+            => writeFile($"{getDaultMessage()}<< {baseException.Message} -- {baseException.Exception?.Message}");
 
         public void logError(BaseException baseException, string id)
-            => handleFile($"{getDaultMessage()}[ID {id}]<< {baseException.Message} -- {baseException.Exception?.Message}");
+            => writeFile($"{getDaultMessage()}[ID {id}]<< {baseException.Message} -- {baseException.Exception?.Message}");
 
         public void logError(ErrorType error)
             => logError(error.ToString());

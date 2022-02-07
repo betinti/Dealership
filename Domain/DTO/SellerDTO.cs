@@ -1,3 +1,5 @@
+using Domain.Enumerations;
+using Domain.Exception;
 using Domain.Models;
 
 namespace Domain.DTO
@@ -13,9 +15,16 @@ namespace Domain.DTO
             if (model == null)
                 return null;
 
-            this.Id = model.Id;
-            this.BaseSalary = model.BaseSalary;
-            this.MonthlyCommission = model.MonthlyCommission;
+            try
+            {
+                this.Id = model.Id;
+                this.BaseSalary = model.BaseSalary;
+                this.MonthlyCommission = model.MonthlyCommission;
+            }
+            catch (ApplicationException e)
+            {
+                throw new BaseException(ErrorType.ParseError, e);
+            }
 
             return this;
         }

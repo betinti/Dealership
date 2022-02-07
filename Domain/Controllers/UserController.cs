@@ -11,9 +11,9 @@ namespace Domain.Controllers
 
         private readonly IUserService _userService;
 
-        public UserController(IUserService _userService)
+        public UserController(IUserService userService)
         {
-            _userService = _userService;
+            _userService = userService;
         }
 
         [HttpPost]
@@ -23,7 +23,7 @@ namespace Domain.Controllers
 
         [HttpGet]
         public IActionResult Get()
-            => Ok(_userService.Get().Select(u => new UserDTO().FromModel(u)).ToList());
+            => Ok(_userService.Get());
 
 
 
