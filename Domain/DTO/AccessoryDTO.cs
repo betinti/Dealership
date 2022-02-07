@@ -15,6 +15,7 @@ namespace Domain.DTO
             if (model == null)
                 return null;
 
+            this.Id = model.Id;
             this.Value = model.Value;
             this.Name = model.Name;
             this.Description = model.Description;

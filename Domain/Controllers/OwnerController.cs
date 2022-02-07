@@ -1,10 +1,11 @@
+using Domain.DTO;
 using Domain.Interfaces.Services;
 using Domain.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Domain.Controllers
 {
-    public class OwnerController: BaseController
+    public class OwnerController : BaseController
     {
 
         private readonly IOwnerService _ownerService;
@@ -15,29 +16,29 @@ namespace Domain.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create([FromBody] Owner owner)
-            => Ok(_ownerService.Create(owner));
+        public IActionResult Create([FromBody] OwnerDTO owner)
+            => Ok(new OwnerDTO().FromModel(_ownerService.Create(owner)));
 
-        
+
         [HttpGet]
         public IActionResult Get()
-            => Ok(_ownerService.Get());
+            => Ok(_ownerService.Get().Select(o => new OwnerDTO().FromModel(o)).ToList());
 
 
 
         [HttpGet("{id}")]
         public IActionResult Get(int id)
-            => Ok(_ownerService.Get(id));
+            => Ok(new OwnerDTO().FromModel(_ownerService.Get(id)));
 
-         
+
         [HttpPut]
-        public IActionResult Update([FromBody] Owner owner)
-            => Ok(_ownerService.Update(owner));
-            
+        public IActionResult Update([FromBody] OwnerDTO owner)
+            => Ok(new OwnerDTO().FromModel(_ownerService.Update(owner)));
+
 
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
-            => Ok(_ownerService.Delete(id));
+            => Ok(new OwnerDTO().FromModel(_ownerService.Delete(id)));
     }
 }
 

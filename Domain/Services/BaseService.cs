@@ -3,10 +3,12 @@ using Domain.Interfaces.Services;
 using Domain.Models;
 using Domain.Enumerations;
 using Domain.Exception;
+using Domain.DTO;
 
 namespace Domain.Services
 {
-    public abstract class BaseService<TModel> : IBaseService<TModel> where TModel : BaseModel, new()
+    public abstract class BaseService<TModel> : IBaseService<TModel>
+     where TModel : BaseModel, new()
     {
         protected readonly IBaseRepository<TModel> _repository;
 
@@ -39,9 +41,6 @@ namespace Domain.Services
 
             return BeforeComplete(result, ErrorType.CantCreate);
         }
-
-        // public TModel Create<TResponse>(TResponse request)
-        //     => Create(request.ToModel());
 
         public IEnumerable<TModel> Create(IEnumerable<TModel> models)
         {
@@ -212,5 +211,25 @@ namespace Domain.Services
 
             return updates;
         }
+
+        public TModel Create<TResponse>(TResponse request)
+         where TResponse : BaseDTO<TModel, TResponse>, new()
+            => Create(request.ToModel());
+
+        public TModel Update<TResponse>(TResponse model)
+         where TResponse : BaseDTO<TModel, TResponse>, new()
+            => Update(model.ToModel());
+
+        public IEnumerable<TModel> Update<TResponse>(IEnumerable<TResponse> models)
+         where TResponse : BaseDTO<TModel, TResponse>, new()
+            => Update(models.Select(m => m.ToModel()));
+
+        public TModel Delete<TResponse>(TResponse model)
+         where TResponse : BaseDTO<TModel, TResponse>, new()
+            => Delete(model.ToModel());
+
+        public IEnumerable<TModel> Delete<TResponse>(IEnumerable<TResponse> models)
+         where TResponse : BaseDTO<TModel, TResponse>, new()
+            => Delete(models.Select(m => m.ToModel()));
     }
 }

@@ -11,6 +11,9 @@ namespace Domain.Services
         private readonly string conectString = @"Domain\Utils\errorsLogger.txt";
         private readonly bool addErro = true;
 
+        private string getDaultMessage()
+            => $"ERROR>>[{DateTime.Now.ToLongDateString()}]";
+
         private void handleFile(string msg)
         {
             StreamWriter erros = new StreamWriter(conectString, addErro);
@@ -19,13 +22,13 @@ namespace Domain.Services
         }
 
         public void logError(string error)
-            => handleFile($"ERROR>>[{DateTime.UtcNow.Kind}]<< {error}");
+            => handleFile($"{getDaultMessage()}<< {error}");
 
         public void logError(BaseException baseException)
-            => handleFile($"ERROR>>[{DateTime.UtcNow.Kind}]<< {baseException.Message} -- {baseException.Exception?.Message}");
-        
+            => handleFile($"{getDaultMessage()}<< {baseException.Message} -- {baseException.Exception?.Message}");
+
         public void logError(BaseException baseException, string id)
-            => handleFile($"ERROR>>[{DateTime.UtcNow.Kind}][ID {id}]<< {baseException.Message} -- {baseException.Exception?.Message}");
+            => handleFile($"{getDaultMessage()}[ID {id}]<< {baseException.Message} -- {baseException.Exception?.Message}");
 
         public void logError(ErrorType error)
             => logError(error.ToString());

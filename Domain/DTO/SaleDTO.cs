@@ -15,6 +15,7 @@ namespace Domain.DTO
             if (model == null)
                 return null;
 
+            this.Id = model.Id;
             this.Car = new CarDTO().FromModel(model.Car);
             this.Seller = new SellerDTO().FromModel(model.Seller);
             this.Owner = new OwnerDTO().FromModel(model.Owner);

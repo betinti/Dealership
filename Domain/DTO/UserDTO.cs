@@ -17,7 +17,8 @@ namespace Domain.DTO
         {
             if (model == null)
                 return null;
-                
+
+            this.Id = model.Id;
             this.Address = new AddressDTO().FromModel(model.Address);
             this.Name = model.Name;
             this.Email = model.Email;

@@ -13,6 +13,7 @@ namespace Domain.DTO
             if (model == null)
                 return null;
 
+            this.Id = model.Id;
             this.CNH = model.CNH;
             this.User = new UserDTO().FromModel(model.User);
 
