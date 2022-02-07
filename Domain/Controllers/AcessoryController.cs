@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Domain.Controllers
 {
-    
+
     public class AccessoryController : BaseController
     {
         private readonly IAccessoryService _accessoryService;
@@ -17,7 +17,7 @@ namespace Domain.Controllers
 
         [HttpPost]
         public IActionResult Create([FromBody] AccessoryDTO accessory)
-            => Ok(_accessoryService.Create(accessory.ToModel()));
+            => Ok(new AccessoryDTO().FromModel(_accessoryService.Create(accessory)));
 
 
         [HttpGet]
@@ -33,7 +33,7 @@ namespace Domain.Controllers
 
         [HttpPut]
         public IActionResult Update([FromBody] AccessoryDTO accessory)
-            => Ok(new AccessoryDTO().FromModel(_accessoryService.Update(accessory.ToModel())));
+            => Ok(new AccessoryDTO().FromModel(_accessoryService.Update(accessory)));
 
 
         [HttpDelete("{id}")]

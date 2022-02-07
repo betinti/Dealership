@@ -1,3 +1,4 @@
+using Domain.DTO;
 using Domain.Interfaces.Services;
 using Domain.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -15,29 +16,29 @@ namespace Domain.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create([FromBody] Model model)
-            => Ok(_modelService.Create(model));
+        public IActionResult Create([FromBody] ModelDTO model)
+            => Ok(new ModelDTO().FromModel(_modelService.Create(model)));
 
 
         [HttpGet]
         public IActionResult Get()
-            => Ok(_modelService.Get());
+            => Ok(_modelService.Get().Select(m => new ModelDTO().FromModel(m)).ToList());
 
 
 
         [HttpGet("{id}")]
         public IActionResult Get(int id)
-            => Ok(_modelService.Get(id));
+            => Ok(new ModelDTO().FromModel(_modelService.Get(id)));
 
 
         [HttpPut]
-        public IActionResult Update([FromBody] Model model)
-            => Ok(_modelService.Update(model));
+        public IActionResult Update([FromBody] ModelDTO model)
+            => Ok(new ModelDTO().FromModel(_modelService.Update(model)));
 
 
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
-            => Ok(_modelService.Delete(id));
+            => Ok(new ModelDTO().FromModel(_modelService.Delete(id)));
     }
 }
 

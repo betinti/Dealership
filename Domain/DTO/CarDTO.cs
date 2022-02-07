@@ -29,6 +29,7 @@ namespace Domain.DTO
             if (model == null)
                 return null;
 
+            this.Id = model.Id;
             this.Chassis = model.Chassis;
             this.Model = new ModelDTO().FromModel(model.Model);
             this.Color = model.Color;

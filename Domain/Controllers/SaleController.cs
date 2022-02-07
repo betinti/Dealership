@@ -15,29 +15,29 @@ namespace Domain.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create([FromBody] Sale sale)
-            => Ok(_saleService.Create(sale));
+        public IActionResult Create([FromBody] SaleDTO sale)
+            => Ok(new SaleDTO().FromModel(_saleService.Create(sale)));
 
 
         [HttpGet]
         public IActionResult Get()
-            => Ok(_saleService.Get());
+            => Ok(_saleService.Get().Select(s => new SaleDTO().FromModel(s)).ToList());
 
 
 
         [HttpGet("{id}")]
         public IActionResult Get(int id)
-            => Ok(_saleService.Get(id));
+            => Ok(new SaleDTO().FromModel(_saleService.Get(id)));
 
 
         [HttpPut]
-        public IActionResult Update([FromBody] Sale sale)
-            => Ok(_saleService.Update(sale));
+        public IActionResult Update([FromBody] SaleDTO sale)
+            => Ok(new SaleDTO().FromModel(_saleService.Update(sale)));
 
 
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
-            => Ok(_saleService.Delete(id));
+            => Ok(new SaleDTO().FromModel(_saleService.Delete(id)));
 
         [HttpPost]
         [Route("newSaleById")]

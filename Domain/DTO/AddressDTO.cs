@@ -18,6 +18,7 @@ namespace Domain.DTO
             if (model == null)
                 return null;
 
+            this.Id = model.Id;
             this.Street = model.Street;
             this.City = model.City;
             this.UF = model.UF;

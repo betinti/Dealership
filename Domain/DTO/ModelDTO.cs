@@ -18,7 +18,8 @@ namespace Domain.DTO
         {
             if (model == null)
                 return null;
-                
+
+            this.Id = model.Id;
             this.Brand = model.Brand;
             this.ModelYear = model.ModelYear;
             this.ManufactureYear = model.ManufactureYear;

@@ -5,9 +5,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Domain.Controllers
 {
-    public class AddressController: BaseController 
+    public class AddressController : BaseController
     {
-        
+
         private readonly IAddressService _addressService;
 
         public AddressController(IAddressService addressService)
@@ -17,28 +17,28 @@ namespace Domain.Controllers
 
         [HttpPost]
         public IActionResult Create([FromBody] AddressDTO address)
-            => Ok(_addressService.Create(address.ToModel()));
+            => Ok(new AddressDTO().FromModel(_addressService.Create(address)));
 
-        
+
         [HttpGet]
         public IActionResult Get()
-            => Ok(_addressService.Get());
+            => Ok(_addressService.Get().Select(a => new AddressDTO().FromModel(a)).ToList());
 
 
 
         [HttpGet("{id}")]
         public IActionResult Get(int id)
-            => Ok(_addressService.Get(id));
+            => Ok(new AddressDTO().FromModel(_addressService.Get(id)));
 
-         
+
         [HttpPut]
         public IActionResult Update([FromBody] AddressDTO address)
-            => Ok(_addressService.Update(address.ToModel()));
-            
+            => Ok(new AddressDTO().FromModel(_addressService.Update(address)));
+
 
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
-            => Ok(_addressService.Delete(id));
+            => Ok(new AddressDTO().FromModel(_addressService.Delete(id)));
     }
 }
 

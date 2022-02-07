@@ -13,6 +13,7 @@ namespace Domain.DTO
             if (model == null)
                 return null;
 
+            this.Id = model.Id;
             this.BaseSalary = model.BaseSalary;
             this.MonthlyCommission = model.MonthlyCommission;
 
