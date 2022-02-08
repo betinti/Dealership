@@ -10,8 +10,6 @@ namespace Domain.DTO
 
         public ModelDTO? Model { get; set; }
 
-        public int? ModelId { get; set; }
-
         public string Color { get; set; }
 
         public double Value { get; set; }
@@ -19,12 +17,10 @@ namespace Domain.DTO
         public double Mileage { get; set; }
 
         public AccessoryDTO? Accessory { get; set; }
-        public int? AccessoryId { get; set; }
 
-        public int SistemVersion { get; set; }
+        public int SystemVersion { get; set; }
 
         public OwnerDTO? Owner { get; set; }
-        public int? OwnerId { get; set; }
 
         public string? LicensePlate { get; set; }
 
@@ -44,7 +40,7 @@ namespace Domain.DTO
                 this.Value = model.Value;
                 this.Mileage = model.Mileage;
                 this.Accessory = new AccessoryDTO().FromModel(model.Accessory);
-                this.SistemVersion = model.SistemVersion;
+                this.SystemVersion = model.SystemVersion;
                 this.Owner = new OwnerDTO().FromModel(model.Owner);
                 this.LicensePlate = model.LicensePlate;
                 this.Renavam = model.Renavam;
@@ -67,10 +63,11 @@ namespace Domain.DTO
                 Value = this.Value,
                 Mileage = this.Mileage,
                 Accessory = this.Accessory.ToModel(),
-                SistemVersion = this.SistemVersion,
+                SystemVersion = this.SystemVersion,
                 Owner = this.Owner.ToModel(),
                 LicensePlate = this.LicensePlate,
                 Renavam = this.Renavam,
+                Id = this.Id.HasValue ? this.Id.Value : 0
             };
 
         }

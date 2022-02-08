@@ -17,17 +17,32 @@ namespace Domain.Services
 
         private void writeFile(string msg)
         {
-            StreamWriter erros = new StreamWriter(conectString, addErro);
-            erros.WriteLine(msg);
-            erros.Close();
+            try
+            {
+                StreamWriter erros = new StreamWriter(conectString, addErro);
+                erros.WriteLine(msg);
+                erros.Close();
+            }
+            catch (ApplicationException e)
+            {
+                throw new ApplicationException("Erro ao escrever no arquivo");
+            }
         }
 
-        // private string readFile()
-        // {
-        //     string file = File.ReadAllText(conectString, Encoding.UTF8);
+        private string readFile()
+        {
+            try
+            {
+                return File.ReadAllText(conectString, Encoding.UTF8);
+            }
+            catch (ApplicationException e)
+            {
+                throw new ApplicationException("Erro ao ler o arquivo");
+            }
+        }
 
-        //     System.Console.WriteLine(file);
-        // }
+        public string GetLogs()
+            => readFile();
 
         public void logError(string error)
             => writeFile($"{getDaultMessage()}<< {error}");
@@ -43,7 +58,6 @@ namespace Domain.Services
 
         public void logError(ApplicationException error)
             => logError(error.Message);
-
 
     }
 }

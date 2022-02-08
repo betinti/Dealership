@@ -42,7 +42,8 @@ namespace Domain.DTO
                 Seller = this.Seller.ToModel(),
                 Owner = this.Owner.ToModel(),
                 Price = this.Price,
-                CommissionPercentage = this.CommissionPercentage
+                CommissionPercentage = this.CommissionPercentage,
+                Id = this.Id.HasValue ? this.Id.Value : 0
             };
         }
     }

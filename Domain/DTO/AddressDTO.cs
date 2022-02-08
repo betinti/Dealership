@@ -49,7 +49,8 @@ namespace Domain.DTO
                 CEP = this.CEP,
                 Number = this.Number,
                 Complement = this.Complement,
-                Reference = this.Reference
+                Reference = this.Reference,
+                Id = this.Id.HasValue ? this.Id.Value : 0
             };
 
         }

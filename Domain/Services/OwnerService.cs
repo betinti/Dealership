@@ -13,7 +13,10 @@ namespace Domain.Services
             _ownerRepository = repository;
         }
 
-        
+        public override Owner Create<OwnerDTO>(OwnerDTO request)
+        {
+            throw new NotImplementedException();
+        }
 
 
     }

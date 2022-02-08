@@ -19,6 +19,11 @@ namespace Domain.Services
             _lazyService = lazyService;
         }
 
+        public override Sale Create<SaleDTO>(SaleDTO request)
+        {
+            throw new NotImplementedException();
+        }
+
         public Sale LastSaleFromSellerId(int sellerId)
         {
             var response = new Sale();

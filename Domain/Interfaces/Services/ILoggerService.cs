@@ -11,5 +11,6 @@ namespace Domain.Interfaces.Services
         void logError(BaseException error);
         void logError(BaseException error, string id);
         void logError(ApplicationException error);
+        string GetLogs();
     }
 }

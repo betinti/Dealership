@@ -47,13 +47,13 @@ namespace Domain.Controllers
         public IActionResult GetByMileageRange(double startMileage, double endMileage)
             => Ok(_carService.GetByMileageRange(startMileage, endMileage).Select(c => new CarDTO().FromModel(c)));
 
-        [HttpGet("getBySistemVersion/{sistemVersion}")]
-        public IActionResult GetBySistemVersion(int sistemVersion)
-            => Ok(_carService.GetBySistemVersion(sistemVersion).Select(c => new CarDTO().FromModel(c)));
+        [HttpGet("getBySystemVersion/{systemVersion}")]
+        public IActionResult GetBySystemVersion(int systemVersion)
+            => Ok(_carService.GetBySystemVersion(systemVersion).Select(c => new CarDTO().FromModel(c)));
 
-        [HttpGet("getBySistemVersionRange/{startSistemVersion}/{endSistemVersion}")]
-        public IActionResult GetBySistemVersionRange(int startSistemVersion, int endSistemVersion)
-            => Ok(_carService.GetBySistemVersionRange(startSistemVersion, endSistemVersion).Select(c => new CarDTO().FromModel(c)));
+        [HttpGet("getBySystemVersionRange/{startSistemVersion}/{endSistemVersion}")]
+        public IActionResult GetBySystemVersionRange(int startSystemVersion, int endSystemVersion)
+            => Ok(_carService.GetBySystemVersionRange(startSystemVersion, endSystemVersion).Select(c => new CarDTO().FromModel(c)));
 
 
         [HttpPut]

@@ -52,7 +52,8 @@ namespace Domain.DTO
                 Phone = this.Phone,
                 DDD = this.DDD,
                 CpfCnpj = this.CpfCnpj,
-                BirthDate = this.BirthDate
+                BirthDate = this.BirthDate,
+                Id = this.Id.HasValue ? this.Id.Value : 0
             };
         }
     }

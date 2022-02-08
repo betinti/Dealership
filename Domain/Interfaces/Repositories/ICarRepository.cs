@@ -7,8 +7,8 @@ namespace Domain.Interfaces.Repositories
         IQueryable<Car> GetByMileage(double mileage);
         IQueryable<Car> GetByMileageRange(double startMiliage, double endMiliage);
 
-        IQueryable<Car> GetBySistemVersion(int sistemVersion);
-        IQueryable<Car> GetBySistemVersionRange(int startSistemVersion, int endSistemVersion);
+        IQueryable<Car> GetBySystemVersion(int sistemVersion);
+        IQueryable<Car> GetBySystemVersionRange(int startSistemVersion, int endSistemVersion);
 
     }
 }

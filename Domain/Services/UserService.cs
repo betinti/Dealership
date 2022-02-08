@@ -13,7 +13,10 @@ namespace Domain.Services
             _userRepository = repository;
         }
 
-
+        public override User Create<UserDTO>(UserDTO request)
+        {
+            throw new NotImplementedException();
+        }
 
 
     }

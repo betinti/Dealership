@@ -24,7 +24,7 @@ namespace Domain.Models
         public Accessory? Accessory { get; set; }
 
         [Required(ErrorMessage = ("Sistem Version is required in user"))]
-        public int SistemVersion { get; set; }
+        public int SystemVersion { get; set; }
 
         public Owner? Owner { get; set; }
 

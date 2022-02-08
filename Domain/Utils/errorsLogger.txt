@@ -1,1 +1,3 @@
 ERROR>>[domingo, 6 de fevereiro de 2022]<< ParameterError
+ERROR>>[terça-feira, 8 de fevereiro de 2022][ID 6]<< NotFound -- 
+ERROR>>[terça-feira, 8 de fevereiro de 2022][ID 4]<< NotFound -- 

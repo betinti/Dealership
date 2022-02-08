@@ -6,7 +6,7 @@ namespace Domain.Interfaces.Services
     {
         List<Car> GetByMileage(double mileage);
         List<Car> GetByMileageRange(double startMiliage, double endMiliage);
-        List<Car> GetBySistemVersion(int sistemVersion);
-        List<Car> GetBySistemVersionRange(int startSistemVersion, int endSistemVersion);
+        List<Car> GetBySystemVersion(int sistemVersion);
+        List<Car> GetBySystemVersionRange(int startSistemVersion, int endSistemVersion);
     }
 }

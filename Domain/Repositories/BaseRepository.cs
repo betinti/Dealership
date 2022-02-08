@@ -53,8 +53,8 @@ namespace Domain.Repositories
 
         public TModel Update(TModel model)
         {
-            var entity = Get(model.Id);
-            _dbSet.Update(entity);
+            // var entity = Get(model.Id);
+            _dbSet.Update(model);
 
             return AfterCRUD(model);
         }

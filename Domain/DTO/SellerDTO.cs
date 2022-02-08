@@ -37,7 +37,8 @@ namespace Domain.DTO
             {
                 BaseSalary = this.BaseSalary,
                 MonthlyCommission = this.MonthlyCommission,
-                UserId = (this.User.Id.HasValue ? this.User.Id.Value : 0)
+                UserId = (this.User.Id.HasValue ? this.User.Id.Value : 0),
+                Id = this.Id.HasValue ? this.Id.Value : 0
             };
         }
     }

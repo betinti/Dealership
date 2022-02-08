@@ -212,7 +212,7 @@ namespace Domain.Services
             return updates;
         }
 
-        public TModel Create<TResponse>(TResponse request)
+        public virtual TModel Create<TResponse>(TResponse request)
          where TResponse : BaseDTO<TModel, TResponse>, new()
             => Create(request.ToModel());
 

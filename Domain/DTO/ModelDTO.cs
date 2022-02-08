@@ -55,6 +55,7 @@ namespace Domain.DTO
                 PassagersCount = this.PassagersCount,
                 HorsesPower = this.HorsesPower,
                 GrossWeight = this.GrossWeight,
+                Id = this.Id.HasValue ? this.Id.Value : 0
             };
         }
     }

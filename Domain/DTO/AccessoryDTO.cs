@@ -38,7 +38,8 @@ namespace Domain.DTO
             {
                 Value = this.Value,
                 Name = this.Name,
-                Description = this.Description
+                Description = this.Description,
+                Id = this.Id.HasValue ? this.Id.Value : 0
             };
         }
     }

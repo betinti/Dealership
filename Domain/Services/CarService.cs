@@ -18,20 +18,16 @@ namespace Domain.Services
             _lazyService = lazyService;
         }
 
+        public override Car Create<CarDTO>(CarDTO request)
+        {
+            throw new NotImplementedException();
+        }
+
         public Car UpdateOrCreate(CarDTO car)
         {
             var model = car.ToModel();
 
-            if (car.ModelId.HasValue)
-                model.Model = _lazyService.Get<IModelService>().GetFilled(car.ModelId.Value);
-
-            if (car.AccessoryId.HasValue)
-                model.Accessory = _lazyService.Get<IAccessoryService>().GetFilled(car.AccessoryId.Value);
-
-            if (car.OwnerId.HasValue)
-                model.Owner = _lazyService.Get<IOwnerService>().GetFilled(car.OwnerId.Value);
-
-            if (!car.Id.HasValue)
+            if (!car.Id.HasValue || car.Id.Value == 0)
                 _carRepository.Create(model);
             else
                 _carRepository.Update(model);
@@ -63,9 +59,9 @@ namespace Domain.Services
             return cars;
         }
 
-        public List<Car> GetBySistemVersion(int sistemVersion)
+        public List<Car> GetBySystemVersion(int systemVersion)
         {
-            var cars = _carRepository.GetBySistemVersion(sistemVersion).ToList();
+            var cars = _carRepository.GetBySystemVersion(systemVersion).ToList();
 
             if (cars.Count <= 0)
                 throw new ArgumentException("Não foram encontrados veículo com tal versão do sistema.");
@@ -73,12 +69,12 @@ namespace Domain.Services
             return cars;
         }
 
-        public List<Car> GetBySistemVersionRange(int startSistemVersion, int endSistemVersion)
+        public List<Car> GetBySystemVersionRange(int startSystemVersion, int endSystemVersion)
         {
-            if (startSistemVersion > endSistemVersion)
+            if (startSystemVersion > endSystemVersion)
                 throw new BaseException(ErrorType.ParameterError);
 
-            var cars = _carRepository.GetBySistemVersionRange(startSistemVersion, endSistemVersion).ToList();
+            var cars = _carRepository.GetBySystemVersionRange(startSystemVersion, endSystemVersion).ToList();
 
             if (cars.Count <= 0)
                 throw new BaseException(ErrorType.AnyFound);

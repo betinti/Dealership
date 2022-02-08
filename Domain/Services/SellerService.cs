@@ -15,6 +15,11 @@ namespace Domain.Services
             _lazyService = lazyService;
         }
 
+        public override Seller Create<SellerDTO>(SellerDTO request)
+        {
+            throw new NotImplementedException();
+        }
+
         public void UpdateMonthlyCommission(Sale sale)
         {
             var seller = sale.Seller;

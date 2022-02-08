@@ -9,7 +9,6 @@ namespace Domain.DTO
     {
         public string CNH { get; set; }
         public UserDTO? User { get; set; }
-        public int? UserId { get; set; }
 
         public override OwnerDTO FromModel(Owner model)
         {
@@ -36,6 +35,7 @@ namespace Domain.DTO
             {
                 CNH = this.CNH,
                 User = this.User.ToModel(),
+                Id = this.Id.HasValue ? this.Id.Value : 0
             };
         }
     }
