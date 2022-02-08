@@ -3,7 +3,8 @@ using Domain.DTO;
 
 namespace Domain.Interfaces.Services
 {
-    public interface IBaseService<TModel> : IDisposable where TModel : BaseModel, new()
+    public interface IBaseService<TModel> : IDisposable
+     where TModel : BaseModel, new()
     {
         TModel Create(TModel model);
 

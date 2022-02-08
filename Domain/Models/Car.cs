@@ -15,7 +15,7 @@ namespace Domain.Models
         [Required(ErrorMessage = ("Color is required in user"))]
         public string Color { get; set; }
 
-        [Required(ErrorMessage = ("Value     is required in user"))]
+        [Required(ErrorMessage = ("Value is required in user"))]
         public double Value { get; set; }
 
         [Required(ErrorMessage = ("Mileage is required in user"))]
