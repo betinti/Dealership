@@ -8,7 +8,9 @@ namespace Domain.DTO
     {
         public string Chassis { get; set; }
 
-        public ModelDTO Model { get; set; }
+        public ModelDTO? Model { get; set; }
+
+        public int? ModelId { get; set; }
 
         public string Color { get; set; }
 
@@ -17,10 +19,12 @@ namespace Domain.DTO
         public double Mileage { get; set; }
 
         public AccessoryDTO? Accessory { get; set; }
+        public int? AccessoryId { get; set; }
 
         public int SistemVersion { get; set; }
 
         public OwnerDTO? Owner { get; set; }
+        public int? OwnerId { get; set; }
 
         public string? LicensePlate { get; set; }
 

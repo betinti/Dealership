@@ -1,10 +1,12 @@
+using Domain.Exception;
 using Domain.Interfaces.Repositories;
 using Domain.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace Domain.Repositories
 {
-    public abstract class BaseRepository<TModel> : IBaseRepository<TModel> where TModel : BaseModel, new()
+    public abstract class BaseRepository<TModel> : IBaseRepository<TModel>
+     where TModel : BaseModel, new()
     {
 
         protected readonly DealershipContext _context;
@@ -61,6 +63,11 @@ namespace Domain.Repositories
         {
             _context.Dispose();
             GC.SuppressFinalize(this);
+        }
+
+        public virtual TModel GetFilled(int id)
+        {
+            throw new BaseException("Método não implementado", id.ToString());
         }
     }
 }

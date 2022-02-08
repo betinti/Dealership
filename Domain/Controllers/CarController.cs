@@ -30,6 +30,10 @@ namespace Domain.Controllers
         [HttpGet("{id}")]
         public IActionResult Get(int id)
             => Ok(new CarDTO().FromModel(_carService.Get(id)));
+        
+        [HttpGet("GetFilled/{id}")]
+        public IActionResult GetFilled(int id)
+            => Ok(new CarDTO().FromModel(_carService.GetFilled(id)));
 
         [HttpGet("getByMileage/{mileage}")]
         public IActionResult GetByMileage(double mileage)

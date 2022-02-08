@@ -13,8 +13,5 @@ namespace Domain.Services
             _addressRepository = repository;
         }
 
-        
-
-
     }
 }

@@ -35,8 +35,7 @@ namespace Domain.Interfaces.Services
         IEnumerable<TModel> Delete<TResponse>(IEnumerable<TResponse> models)
         where TResponse : BaseDTO<TModel, TResponse>, new();
 
-
-
+        TModel GetFilled(int id);
 
     }
 }

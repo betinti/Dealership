@@ -15,6 +15,7 @@ namespace Domain.Interfaces.Repositories
         
         TModel Delete(int id);
 
+        TModel GetFilled(int id);
 
     }
 }

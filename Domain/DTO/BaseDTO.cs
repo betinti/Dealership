@@ -7,7 +7,7 @@ namespace Domain.DTO
       where TModel : BaseModel, new()
       where TResponse : BaseDTO<TModel, TResponse>, new()
     {
-        public int Id { get; set; }
+        public int? Id { get; set; }
 
 
         public virtual TModel ToModel() => new TModel();

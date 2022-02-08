@@ -21,10 +21,10 @@ namespace Domain.Models
         [Required(ErrorMessage = "Address number needs is required")]
         public int Number { get; set; }
 
-        [StringLength(100)]
+        // [StringLength(100)]
         public string? Complement { get; set; }
 
-        [StringLength(100)]
+        // [StringLength(100)]
         public string? Reference { get; set; }
     }
 

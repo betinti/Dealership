@@ -8,7 +8,8 @@ namespace Domain.DTO
     {
         public double BaseSalary { get; set; }
         public double MonthlyCommission { get; set; }
-        public UserDTO User { get; set; }
+        public UserDTO? User { get; set; }
+        public int? UserId { get; set; }
 
         public override SellerDTO FromModel(Seller model)
         {
@@ -20,6 +21,7 @@ namespace Domain.DTO
                 this.Id = model.Id;
                 this.BaseSalary = model.BaseSalary;
                 this.MonthlyCommission = model.MonthlyCommission;
+                this.User = new UserDTO { Id = model.Id };
             }
             catch (ApplicationException e)
             {
@@ -35,6 +37,7 @@ namespace Domain.DTO
             {
                 BaseSalary = this.BaseSalary,
                 MonthlyCommission = this.MonthlyCommission,
+                UserId = (this.User.Id.HasValue ? this.User.Id.Value : 0)
             };
         }
     }

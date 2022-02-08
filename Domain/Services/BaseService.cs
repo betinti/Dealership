@@ -231,5 +231,8 @@ namespace Domain.Services
         public IEnumerable<TModel> Delete<TResponse>(IEnumerable<TResponse> models)
          where TResponse : BaseDTO<TModel, TResponse>, new()
             => Delete(models.Select(m => m.ToModel()));
+
+        public virtual TModel GetFilled(int id)
+            => _repository.GetFilled(id);
     }
 }

@@ -24,5 +24,10 @@ namespace Domain.Repositories
 
         public IQueryable<Car> GetBySistemVersionRange(int startSistemVersion, int endSistemVersion)
             => GetAllFilled().Where(c => c.SistemVersion >= startSistemVersion).Where(c => c.SistemVersion <= endSistemVersion);
+
+        public virtual Car GetFilled(int id)
+            => _dbSet
+                .Include(c => c.Owner).Include(c => c.Accessory).Include(c => c.Model)
+                .Where(c => c.Id == id).FirstOrDefault();
     }
 }

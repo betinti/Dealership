@@ -10,5 +10,7 @@ namespace Domain.Repositories
         {
         }
 
+        public virtual Address GetFilled(int id)
+            => Get(id);
     }
 }

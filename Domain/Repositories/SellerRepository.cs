@@ -10,5 +10,8 @@ namespace Domain.Repositories
         {
         }
 
+        public virtual Seller GetFilled(int id)
+            => Get(id);
+
     }
 }

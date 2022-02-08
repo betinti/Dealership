@@ -9,7 +9,7 @@ namespace Domain.Services
 {
     public class SaleService : BaseService<Sale>, ISaleService
     {
-        private readonly double commissionPercentage = 1.0;
+        private readonly double commissionPercentage = 0.1;
         private readonly new ISaleRepository _saleRepository;
         private readonly new ILazyService _lazyService;
 

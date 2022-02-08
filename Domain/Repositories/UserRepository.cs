@@ -10,5 +10,10 @@ namespace Domain.Repositories
         {
         }
 
+        public virtual User GetFilled(int id)
+            => _dbSet.Where(u => u.Id == id)
+                    .Include(u => u.Address)
+                    .FirstOrDefault();
+
     }
 }

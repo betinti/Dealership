@@ -10,5 +10,9 @@ namespace Domain.Repositories
         {
         }
 
+        public virtual Owner GetFilled(int id)
+            => _dbSet.Where(o => o.Id == id)
+                    .Include(o => o.User).FirstOrDefault();
+
     }
 }

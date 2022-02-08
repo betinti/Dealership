@@ -7,6 +7,7 @@ namespace Domain.DTO
     public class UserDTO : BaseDTO<User, UserDTO>
     {
         public AddressDTO Address { get; set; }
+        public int? AddressId { get; set; }
         public string Name { get; set; }
         public string Email { get; set; }
         public int? Age { get; set; }

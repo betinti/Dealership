@@ -30,6 +30,9 @@ namespace Domain.Controllers
         public IActionResult Get(int id)
             => Ok(new OwnerDTO().FromModel(_ownerService.Get(id)));
 
+        [HttpGet("GetFilled/{id}")]
+        public IActionResult GetFilled(int id)
+                    => Ok(new OwnerDTO().FromModel(_ownerService.GetFilled(id)));
 
         [HttpPut]
         public IActionResult Update([FromBody] OwnerDTO owner)

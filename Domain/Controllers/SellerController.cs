@@ -31,6 +31,10 @@ namespace Domain.Controllers
         public IActionResult Get(int id)
             => Ok(new SellerDTO().FromModel(_sellerService.Get(id)));
 
+        [HttpGet("GetFilled/{id}")]
+        public IActionResult GetFilled(int id)
+            => Ok(new SellerDTO().FromModel(_sellerService.GetFilled(id)));
+
 
         [HttpPut]
         public IActionResult Update([FromBody] Seller seller)

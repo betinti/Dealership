@@ -2,7 +2,6 @@ using Domain.DTO;
 using Domain.Interfaces.Services;
 using Domain.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace Domain.Controllers
 {
@@ -31,6 +30,9 @@ namespace Domain.Controllers
         public IActionResult Get(int id)
             => Ok(new UserDTO().FromModel(_userService.Get(id)));
 
+        [HttpGet("GetFilled/{id}")]
+        public IActionResult GetFilled(int id)
+            => Ok(new UserDTO().FromModel(_userService.GetFilled(id)));
 
         [HttpPut]
         public IActionResult Update([FromBody] UserDTO user)

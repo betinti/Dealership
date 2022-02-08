@@ -8,7 +8,8 @@ namespace Domain.DTO
     public class OwnerDTO : BaseDTO<Owner, OwnerDTO>
     {
         public string CNH { get; set; }
-        public UserDTO User { get; set; }
+        public UserDTO? User { get; set; }
+        public int? UserId { get; set; }
 
         public override OwnerDTO FromModel(Owner model)
         {
