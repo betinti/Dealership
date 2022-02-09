@@ -31,8 +31,33 @@ namespace Domain.DTO
             return this;
         }
 
+        public override Seller ToSimpleModel()
+        {
+            if (this.BaseSalary == null)
+                throw new BaseException("BaseSalary is required in user");
+
+            if (this.MonthlyCommission == null)
+                throw new BaseException("MonthlyCommission is required in user");
+
+            return new Seller
+            {
+                BaseSalary = this.BaseSalary,
+                MonthlyCommission = this.MonthlyCommission,
+                Id = this.Id.HasValue ? this.Id.Value : 0
+            };
+        }
+
         public override Seller ToModel()
         {
+            if (this.BaseSalary == null)
+                throw new BaseException("BaseSalary is required in user");
+
+            if (this.MonthlyCommission == null)
+                throw new BaseException("MonthlyCommission is required in user");
+
+            if (this.User == null)
+                throw new BaseException("Seller needs an user");
+
             return new Seller
             {
                 BaseSalary = this.BaseSalary,

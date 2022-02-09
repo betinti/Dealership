@@ -11,6 +11,7 @@ namespace Domain.DTO
 
 
         public virtual TModel ToModel() => new TModel();
+        public virtual TModel ToSimpleModel() => new TModel();
         public virtual TResponse FromModel(TModel model) => new TResponse();
 
         public virtual Dictionary<string, string> ToDictionary()

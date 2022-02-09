@@ -2,7 +2,6 @@ using Domain.DTO;
 using Domain.Interfaces.Services;
 using Domain.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace Domain.Controllers
 {
@@ -24,8 +23,6 @@ namespace Domain.Controllers
         [HttpGet]
         public IActionResult Get()
             => Ok(_sellerService.Get().Select(s => new SellerDTO().FromModel(s)).ToList());
-
-
 
         [HttpGet("{id}")]
         public IActionResult Get(int id)

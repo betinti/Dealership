@@ -43,6 +43,13 @@ namespace Domain.Exception
 
             logService.logError(this);
         }
+        
+        public BaseException(string Message)
+        {
+            this.Message = Message;
+
+            logService.logError(this);
+        }
 
         public BaseException(ErrorType ErrorType, string id)
         {

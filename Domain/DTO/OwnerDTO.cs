@@ -29,8 +29,28 @@ namespace Domain.DTO
             return this;
         }
 
+        public override Owner ToSimpleModel()
+        {
+            if (this.CNH == null)
+                throw new BaseException("CNH is required in user");
+
+            return new Owner
+            {
+                CNH = this.CNH,
+                Id = this.Id.HasValue ? this.Id.Value : 0
+            };
+        }
+
         public override Owner ToModel()
         {
+            if (this.User == null)
+                throw new BaseException("Seller needs an user");
+
+            if (this.CNH == null)
+                throw new BaseException("CNH is required in user");
+            else if (this.CNH.Length < 11)
+                throw new BaseException("CNH is lower than 11 characters");
+
             return new Owner
             {
                 CNH = this.CNH,

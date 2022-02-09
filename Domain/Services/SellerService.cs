@@ -1,6 +1,7 @@
 using Domain.Models;
 using Domain.Interfaces.Services;
 using Domain.Interfaces.Repositories;
+using Domain.DTO;
 
 namespace Domain.Services
 {
@@ -13,11 +14,6 @@ namespace Domain.Services
         {
             _sellerRepository = repository;
             _lazyService = lazyService;
-        }
-
-        public override Seller Create<SellerDTO>(SellerDTO request)
-        {
-            throw new NotImplementedException();
         }
 
         public void UpdateMonthlyCommission(Sale sale)

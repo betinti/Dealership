@@ -41,6 +41,25 @@ namespace Domain.DTO
 
         public override Address ToModel()
         {
+            if (this.Street == null)
+                throw new BaseException("Address Street is required");
+
+            if (this.City == null)
+                throw new BaseException("Address City is required");
+
+            if (this.UF == null)
+                throw new BaseException("Address UF is required");
+            else if (this.UF.Length > 2)
+                throw new BaseException("Address UF is bigger than normal two caracters");
+
+            if (this.CEP == null)
+                throw new BaseException("Address CEP is required");
+            else if (this.CEP.Length < 6)
+                throw new BaseException("CEP is smaller than normal six caracters");
+
+            if (this.Number == null)
+                throw new BaseException("Address number is required");
+
             return new Address
             {
                 Street = this.Street,
@@ -52,8 +71,8 @@ namespace Domain.DTO
                 Reference = this.Reference,
                 Id = this.Id.HasValue ? this.Id.Value : 0
             };
-
         }
+
     }
 
 }

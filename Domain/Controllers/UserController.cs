@@ -20,10 +20,13 @@ namespace Domain.Controllers
             => Ok(new UserDTO().FromModel(_userService.Create(user)));
 
 
+        [HttpPost("{addressId}")]
+        public IActionResult CreateWithCreateds([FromBody] UserDTO seller, int addressId)
+            => Ok(new UserDTO().FromModel(_userService.CreateWithCreateds(seller, addressId)));
+
         [HttpGet]
         public IActionResult Get()
             => Ok(_userService.Get());
-
 
 
         [HttpGet("{id}")]

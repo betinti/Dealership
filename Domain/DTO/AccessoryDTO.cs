@@ -8,9 +8,9 @@ namespace Domain.DTO
 {
     public class AccessoryDTO : BaseDTO<Accessory, AccessoryDTO>
     {
-        public double Value { get; set; }
-        public string Name { get; set; }
-        public string Description { get; set; }
+        public double? Value { get; set; }
+        public string? Name { get; set; }
+        public string? Description { get; set; }
 
         public override AccessoryDTO FromModel(Accessory model)
         {
@@ -34,9 +34,15 @@ namespace Domain.DTO
 
         public override Accessory ToModel()
         {
+            if (!this.Value.HasValue)
+                throw new BaseException("The value is required at Accessory");
+
+            if (this.Name == null)
+                throw new BaseException("The name of an Accessory is required");
+
             return new Accessory
             {
-                Value = this.Value,
+                Value = this.Value.HasValue ? this.Value.Value : 0,
                 Name = this.Name,
                 Description = this.Description,
                 Id = this.Id.HasValue ? this.Id.Value : 0

@@ -19,17 +19,14 @@ namespace Domain.Controllers
         [HttpPost]
         public IActionResult Create([FromBody] CarDTO car)
             => Ok(new CarDTO().FromModel(_carService.Create(car)));
-
-        [HttpPost("UpdateOrCreate")]
-        public IActionResult UpdateOrCreate([FromBody] CarDTO car)
-            => Ok(new CarDTO().FromModel(_carService.Create(car)));
-
+        
+        [HttpPost("{modelId}/{accessoryId}/{ownerId}")]
+        public IActionResult CreateWithCreateds([FromBody] CarDTO car, int modelId, int accessoryId, int ownerId)
+            => Ok(new CarDTO().FromModel(_carService.CreateWithCreateds(car, modelId, accessoryId, ownerId)));
 
         [HttpGet]
         public IActionResult Get()
             => Ok(_carService.Get().Select(c => new CarDTO().FromModel(c)));
-
-
 
         [HttpGet("{id}")]
         public IActionResult Get(int id)

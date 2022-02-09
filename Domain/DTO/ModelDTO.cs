@@ -44,19 +44,31 @@ namespace Domain.DTO
 
         public override Model ToModel()
         {
+            if (this.Brand == null)
+                throw new BaseException("The brand of a model is required");
+
+            if (this.ModelYear == null)
+                throw new BaseException("The year of a model is required");
+
+            if (this.ManufactureYear == null)
+                throw new BaseException("The manufactore year of a model is required");
+
+            if (this.ModelDescription == null)
+                throw new BaseException("The description of a model is required");
+
             return new Model
-            {
-                Brand = this.Brand,
-                ModelYear = this.ModelYear,
-                ManufactureYear = this.ManufactureYear,
-                ModelDescription = this.ModelDescription,
-                Engine = this.Engine,
-                GearsCount = this.GearsCount,
-                PassagersCount = this.PassagersCount,
-                HorsesPower = this.HorsesPower,
-                GrossWeight = this.GrossWeight,
-                Id = this.Id.HasValue ? this.Id.Value : 0
-            };
+                {
+                    Brand = this.Brand,
+                    ModelYear = this.ModelYear,
+                    ManufactureYear = this.ManufactureYear,
+                    ModelDescription = this.ModelDescription,
+                    Engine = this.Engine,
+                    GearsCount = this.GearsCount,
+                    PassagersCount = this.PassagersCount,
+                    HorsesPower = this.HorsesPower,
+                    GrossWeight = this.GrossWeight,
+                    Id = this.Id.HasValue ? this.Id.Value : 0
+                };
         }
     }
 }

@@ -11,6 +11,8 @@ namespace Domain.DTO
         public OwnerDTO Owner { get; set; }
         public double Price { get; set; }
         public double CommissionPercentage { get; set; }
+        public DateTime BuyDate { get; set; }
+
 
         public override SaleDTO FromModel(Sale model)
         {
@@ -36,6 +38,24 @@ namespace Domain.DTO
 
         public override Sale ToModel()
         {
+            if (this.Car == null)
+                throw new BaseException("Car in an sale is required");
+
+            if (this.Seller == null)
+                throw new BaseException("Seller in an sale is required");
+
+            if (this.Owner == null)
+                throw new BaseException("Owner in an sale is required");
+
+            if (this.Price == null)
+                throw new BaseException("Price in an sale is required");
+
+            if (this.CommissionPercentage == null)
+                throw new BaseException("The Commission Percentage in an sale is required");
+
+            if (this.BuyDate == null)
+                throw new BaseException("Date in an sale is required");
+
             return new Sale
             {
                 Car = this.Car.ToModel(),

@@ -1,6 +1,5 @@
 using Domain.DTO;
 using Domain.Interfaces.Services;
-using Domain.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Domain.Controllers

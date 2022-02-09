@@ -18,9 +18,39 @@ namespace Domain.Services
             _lazyService = lazyService;
         }
 
+
+        public Car CreateWithCreateds(CarDTO request, int modelId, int accessoryId, int ownerId)
+        {
+            var car = request.ToSimpleModel();
+
+            car.Model = _lazyService.Get<IModelService>().Get(modelId);
+
+            if (ownerId != 0)
+                car.Owner = _lazyService.Get<IOwnerService>().Get(ownerId);
+
+            if (accessoryId != 0)
+                car.Accessory = _lazyService.Get<IAccessoryService>().Get(accessoryId);
+
+            return Create(car);
+        }
+
         public override Car Create<CarDTO>(CarDTO request)
         {
-            throw new NotImplementedException();
+            var model = request.ToModel();
+
+            try
+            {
+                model = _carRepository.Create(model);
+            }
+            catch (ApplicationException e)
+            {
+                throw new BaseException("Erro ao criar carro", e);
+            }
+
+            if (model == null)
+                throw new BaseException("Erro ao criar carro");
+
+            return model;
         }
 
         public Car UpdateOrCreate(CarDTO car)

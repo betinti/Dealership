@@ -7,7 +7,6 @@ namespace Domain.DTO
     public class UserDTO : BaseDTO<User, UserDTO>
     {
         public AddressDTO Address { get; set; }
-        public int? AddressId { get; set; }
         public string Name { get; set; }
         public string Email { get; set; }
         public int? Age { get; set; }
@@ -41,8 +40,58 @@ namespace Domain.DTO
             return this;
         }
 
+        public override User ToSimpleModel()
+        {
+            if (this.Name == null)
+                throw new BaseException("Name is required in user");
+
+            if (this.Email == null)
+                throw new BaseException("E-mail is required in user");
+
+            if (this.Phone == null)
+                throw new BaseException("Phone is required in user");
+
+            if (this.DDD == null)
+                throw new BaseException("DDD is required in user");
+
+            if (this.CpfCnpj == null)
+                throw new BaseException("Cpf or Cnpj is required in user");
+            else if (this.CpfCnpj.Length > 18)
+                throw new BaseException("Cpf or Cnpj is bigger than 18 characters");
+            else if (this.CpfCnpj.Length < 11)
+                throw new BaseException("Cpf or Cnpj is lower than 11 characters");
+
+            return new User
+            {
+                Name = this.Name,
+                Email = this.Email,
+                Phone = this.Phone,
+                DDD = this.DDD,
+                CpfCnpj = this.CpfCnpj,
+                Id = this.Id.HasValue ? this.Id.Value : 0
+            };
+        }
+
         public override User ToModel()
         {
+            if (this.Address == null)
+                throw new BaseException("Addres is required in user");
+
+            if (this.Name == null)
+                throw new BaseException("Name is required in user");
+
+            if (this.Email == null)
+                throw new BaseException("E-mail is required in user");
+
+            if (this.Phone == null)
+                throw new BaseException("Phone is required in user");
+
+            if (this.DDD == null)
+                throw new BaseException("DDD is required in user");
+
+            if (this.CpfCnpj == null)
+                throw new BaseException("Cpf or Cnpj is required in user");
+
             return new User
             {
                 Address = this.Address.ToModel(),
