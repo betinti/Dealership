@@ -9,3 +9,10 @@ ERROR>>[terça-feira, 8 de fevereiro de 2022][ID 5]<< NotFound --
 ERROR>>[terça-feira, 8 de fevereiro de 2022]<< Mileage is required in user -- 
 ERROR>>[terça-feira, 8 de fevereiro de 2022][ID 13]<< NotFound -- 
 ERROR>>[quarta-feira, 9 de fevereiro de 2022]<< AnyFound
+ERROR>>[quarta-feira, 9 de fevereiro de 2022]<< AnyFound
+ERROR>>[quarta-feira, 9 de fevereiro de 2022]<< AnyFound
+ERROR>>[9/2/22 00:43:55]<< AnyFound
+ERROR>>[9/2/22 00:44:29]<< AnyFound
+ERROR>>[quarta-feira, 9 de fevereiro de 2022 00:46:48]<< AnyFound
+ERROR>>[quarta-feira, 09 fevereiro 2022 00:49:27  - 00:49:27]<< AnyFound
+ERROR>>[quarta-feira, 09 fevereiro 2022  00:50:07 ]<< AnyFound

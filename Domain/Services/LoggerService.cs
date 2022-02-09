@@ -13,7 +13,7 @@ namespace Domain.Services
         private readonly bool addErro = true;
 
         private string getDaultMessage()
-            => $"ERROR>>[{DateTime.Now.ToLongDateString()}]";
+            => $"ERROR>>[{DateTime.Now.ToString("dddd, dd MMMM yyyy  HH:mm:ss tt")}]";
 
         private void writeFile(string msg)
         {
