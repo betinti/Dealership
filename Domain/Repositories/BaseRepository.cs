@@ -1,4 +1,3 @@
-using Domain.Exception;
 using Domain.Interfaces.Repositories;
 using Domain.Models;
 using Microsoft.EntityFrameworkCore;
@@ -84,9 +83,7 @@ namespace Domain.Repositories
         }
 
         public virtual TModel GetFilled(int id)
-        {
-            throw new BaseException("Método não implementado", id.ToString());
-        }
+            => Get(id);
 
         public IEnumerable<TModel> Delete(IEnumerable<TModel> models)
         {

@@ -9,8 +9,8 @@ namespace Domain.DTO
         public CarDTO Car { get; set; }
         public SellerDTO Seller { get; set; }
         public OwnerDTO Owner { get; set; }
-        public double Price { get; set; }
-        public double CommissionPercentage { get; set; }
+        public double? Price { get; set; }
+        public double? CommissionPercentage { get; set; }
         public DateTime BuyDate { get; set; }
 
 
@@ -47,10 +47,10 @@ namespace Domain.DTO
             if (this.Owner == null)
                 throw new BaseException("Owner in an sale is required");
 
-            if (this.Price == null)
+            if (!this.Price.HasValue)
                 throw new BaseException("Price in an sale is required");
 
-            if (this.CommissionPercentage == null)
+            if (!this.CommissionPercentage.HasValue)
                 throw new BaseException("The Commission Percentage in an sale is required");
 
             if (this.BuyDate == null)
@@ -61,8 +61,8 @@ namespace Domain.DTO
                 Car = this.Car.ToModel(),
                 Seller = this.Seller.ToModel(),
                 Owner = this.Owner.ToModel(),
-                Price = this.Price,
-                CommissionPercentage = this.CommissionPercentage,
+                Price = this.Price.HasValue ? this.Price.Value : 0,
+                CommissionPercentage = this.CommissionPercentage.HasValue ? this.CommissionPercentage.Value : 0,
                 Id = this.Id.HasValue ? this.Id.Value : 0
             };
         }

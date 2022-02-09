@@ -49,22 +49,16 @@ namespace Domain.DTO
 
         public override Seller ToModel()
         {
-            if (this.BaseSalary == null)
-                throw new BaseException("BaseSalary is required in user");
-
-            if (this.MonthlyCommission == null)
-                throw new BaseException("MonthlyCommission is required in user");
+            var seller = ToSimpleModel();
 
             if (this.User == null)
                 throw new BaseException("Seller needs an user");
+            else if (this.User.Id == null)
+                throw new BaseException("Seller needs an user created");
 
-            return new Seller
-            {
-                BaseSalary = this.BaseSalary,
-                MonthlyCommission = this.MonthlyCommission,
-                UserId = (this.User.Id.HasValue ? this.User.Id.Value : 0),
-                Id = this.Id.HasValue ? this.Id.Value : 0
-            };
+            seller.UserId = this.User.Id.HasValue ? this.User.Id.Value : 0;
+
+            return seller;
         }
     }
 }

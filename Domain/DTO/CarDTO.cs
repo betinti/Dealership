@@ -86,6 +86,9 @@ namespace Domain.DTO
         {
             var car = ToSimpleModel();
 
+            if ((car.LicensePlate != null && car.Renavam == null) || (car.LicensePlate == null && car.Renavam != null))
+                throw new BaseException("The duo LicensePlate and Renavam are required");
+
             if (car.LicensePlate != null && car.LicensePlate.Length < 10)
                 throw new BaseException("Car LicensePlate is lower than 10 characters");
             else if (car.LicensePlate != null && car.LicensePlate.Length > 15)

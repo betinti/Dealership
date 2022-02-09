@@ -17,7 +17,7 @@ namespace Domain.Controllers
 
         [HttpPost]
         public IActionResult Create([FromBody] SellerDTO seller)
-            => Ok(new SellerDTO().FromModel(_sellerService.Create(seller)));
+            => Ok(new SellerDTO().FromModel(_sellerService.CreateSeller(seller)));
 
 
         [HttpGet]

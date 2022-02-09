@@ -25,7 +25,7 @@ namespace Domain.Repositories
         public IQueryable<Car> GetBySystemVersionRange(int startSystemVersion, int endSystemVersion)
             => GetAllFilled().Where(c => c.SystemVersion >= startSystemVersion).Where(c => c.SystemVersion <= endSystemVersion);
 
-        public virtual Car GetFilled(int id)
+        public override Car GetFilled(int id)
             => _dbSet
                 .Include(c => c.Owner).Include(c => c.Accessory).Include(c => c.Model)
                 .Where(c => c.Id == id).FirstOrDefault();

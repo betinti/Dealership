@@ -11,7 +11,7 @@ namespace Domain.DTO
         public string Email { get; set; }
         public int? Age { get; set; }
         public string Phone { get; set; }
-        public int DDD { get; set; }
+        public int? DDD { get; set; }
         public string CpfCnpj { get; set; }
         public DateTime? BirthDate { get; set; }
 
@@ -51,7 +51,7 @@ namespace Domain.DTO
             if (this.Phone == null)
                 throw new BaseException("Phone is required in user");
 
-            if (this.DDD == null)
+            if (!this.DDD.HasValue)
                 throw new BaseException("DDD is required in user");
 
             if (this.CpfCnpj == null)
@@ -66,7 +66,7 @@ namespace Domain.DTO
                 Name = this.Name,
                 Email = this.Email,
                 Phone = this.Phone,
-                DDD = this.DDD,
+                DDD = this.DDD.HasValue ? this.DDD.Value : 0,
                 CpfCnpj = this.CpfCnpj,
                 Id = this.Id.HasValue ? this.Id.Value : 0
             };
@@ -77,33 +77,13 @@ namespace Domain.DTO
             if (this.Address == null)
                 throw new BaseException("Addres is required in user");
 
-            if (this.Name == null)
-                throw new BaseException("Name is required in user");
+            var user = ToSimpleModel();
 
-            if (this.Email == null)
-                throw new BaseException("E-mail is required in user");
+            user.Address = this.Address.ToModel();
+            user.Age = this.Age;
+            user.BirthDate = this.BirthDate;
 
-            if (this.Phone == null)
-                throw new BaseException("Phone is required in user");
-
-            if (this.DDD == null)
-                throw new BaseException("DDD is required in user");
-
-            if (this.CpfCnpj == null)
-                throw new BaseException("Cpf or Cnpj is required in user");
-
-            return new User
-            {
-                Address = this.Address.ToModel(),
-                Name = this.Name,
-                Email = this.Email,
-                Age = this.Age,
-                Phone = this.Phone,
-                DDD = this.DDD,
-                CpfCnpj = this.CpfCnpj,
-                BirthDate = this.BirthDate,
-                Id = this.Id.HasValue ? this.Id.Value : 0
-            };
+            return user;
         }
     }
 }

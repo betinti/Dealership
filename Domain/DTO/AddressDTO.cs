@@ -59,6 +59,12 @@ namespace Domain.DTO
 
             if (this.Number == null)
                 throw new BaseException("Address number is required");
+            
+            if (this.Complement == null)
+                throw new BaseException("Address Complement is required");
+            
+            if (this.Reference == null)
+                throw new BaseException("Address Reference is required");
 
             return new Address
             {

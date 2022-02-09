@@ -9,8 +9,5 @@ namespace Domain.Repositories
         public AddressRepository(DealershipContext context) : base(context)
         {
         }
-
-        public virtual Address GetFilled(int id)
-            => Get(id);
     }
 }
