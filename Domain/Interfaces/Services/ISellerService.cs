@@ -7,5 +7,7 @@ namespace Domain.Interfaces.Services
     {
         void UpdateMonthlyCommission(Sale sale);
         Seller CreateSeller(SellerDTO request);
+        double GetTotalSalary(int id);
+        double GetTotalSalaryByMonth(int id, int month);
     }
 }

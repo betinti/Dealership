@@ -113,6 +113,12 @@ namespace Domain.Services
         }
 
         public List<Car> GetBySystemVersionAndMileage(int systemVersion, double mileage)
-            => _carRepository.GetBySystemVersionAndMileage(systemVersion, mileage).ToList();
+        {
+            var cars = _carRepository.GetBySystemVersionAndMileage(systemVersion, mileage).ToList();
+            if (cars == null) throw new BaseException(ErrorType.AnyFound);
+            else if (cars.Count == 0) throw new BaseException(ErrorType.AnyFound);
+
+            return cars;
+        }
     }
 }

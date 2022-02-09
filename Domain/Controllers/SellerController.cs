@@ -28,9 +28,17 @@ namespace Domain.Controllers
         public IActionResult Get(int id)
             => Ok(new SellerDTO().FromModel(_sellerService.Get(id)));
 
-        [HttpGet("GetFilled/{id}")]
+        [HttpGet("getFilled/{id}")]
         public IActionResult GetFilled(int id)
             => Ok(new SellerDTO().FromModel(_sellerService.GetFilled(id)));
+
+        [HttpGet("getTotalSalary/{id}")]
+        public IActionResult GetTotalSalary(int id)
+            => Ok(_sellerService.GetTotalSalary(id));
+
+        [HttpGet("getTotalSalaryByMonth/{id}/{month}")]
+        public IActionResult GetTotalSalaryByMonth(int id, int month)
+            => Ok(_sellerService.GetTotalSalaryByMonth(id, month));
 
 
         [HttpPut]

@@ -21,5 +21,8 @@ namespace Domain.Repositories
                     .Include(s => s.Seller)
                     .Include(s => s.Owner).ThenInclude(o => o.User)
                     .FirstOrDefault();
+
+        public IQueryable<Sale> GetBySellerAndMonth(int sellerId, int month)
+            => _dbSet.Where(s => s.Seller.Id == sellerId && s.BuyDate.Month == month);
     }
 }

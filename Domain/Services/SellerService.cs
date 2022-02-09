@@ -33,6 +33,19 @@ namespace Domain.Services
 
             Update(seller);
         }
+        
+        public void UpdateMonthlyCommission(Seller seller)
+        {
+            var todayDate = DateTime.Now;
+            
+            var lastSaleDate = _lazyService.Get<ISaleService>().LastSaleFromSellerId(seller.Id).BuyDate;
+
+            if (todayDate.Month > lastSaleDate.Month && todayDate.Year >= lastSaleDate.Year)
+                seller.MonthlyCommission = 0;
+
+
+            Update(seller);
+        }
 
         public Seller CreateSeller(SellerDTO request)
         {
@@ -51,5 +64,26 @@ namespace Domain.Services
             return _sellerRepository.Create(model);
         }
 
+        public double GetTotalSalary(int id)
+        {
+            var seller = _sellerRepository.Get(id);
+
+            UpdateMonthlyCommission(seller);
+
+            return seller.BaseSalary + seller.MonthlyCommission;
+        }
+        
+        public double GetTotalSalaryByMonth(int id, int month)
+        {
+            var seller = _sellerRepository.Get(id);
+
+            var sales = _lazyService.Get<ISaleService>().GetBySellerAndMonth(id, month);
+
+            var sum = 0.0;
+            foreach (var sale in sales)
+                sum += sale.Price * sale.CommissionPercentage;
+
+            return sum + seller.BaseSalary;
+        }
     }
 }

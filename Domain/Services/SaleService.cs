@@ -19,6 +19,16 @@ namespace Domain.Services
             _lazyService = lazyService;
         }
 
+        public List<Sale> GetBySellerAndMonth(int sellerId, int month)
+        {
+            var sales = _saleRepository.GetBySellerAndMonth(sellerId, month).ToList();
+
+            if (sales == null || sales.Count == 0)
+                throw new BaseException(ErrorType.AnyFound);
+
+            return sales;
+        }
+
         public Sale LastSaleFromSellerId(int sellerId)
         {
             var response = new Sale();
