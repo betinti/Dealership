@@ -75,13 +75,13 @@ namespace Domain.Services
             return cars;
         }
 
-        public List<Car> GetByMileageRange(double startMiliage, double endMiliage)
+        public List<Car> GetByMileageRange(double startMileage, double endMileage)
         {
 
-            if (startMiliage > endMiliage)
+            if (startMileage > endMileage)
                 throw new BaseException(ErrorType.ParameterError);
 
-            var cars = _carRepository.GetByMileageRange(startMiliage, endMiliage).ToList();
+            var cars = _carRepository.GetByMileageRange(startMileage, endMileage).ToList();
 
             if (cars.Count <= 0)
                 throw new BaseException(ErrorType.AnyFound);
@@ -111,5 +111,8 @@ namespace Domain.Services
 
             return cars;
         }
+
+        public List<Car> GetBySystemVersionAndMileage(int systemVersion, double mileage)
+            => _carRepository.GetBySystemVersionAndMileage(systemVersion, mileage).ToList();
     }
 }

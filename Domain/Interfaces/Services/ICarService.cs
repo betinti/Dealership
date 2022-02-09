@@ -7,8 +7,9 @@ namespace Domain.Interfaces.Services
     {
         Car CreateWithCreateds(CarDTO request, int modelId, int accessoryId, int ownerId);
         List<Car> GetByMileage(double mileage);
-        List<Car> GetByMileageRange(double startMiliage, double endMiliage);
-        List<Car> GetBySystemVersion(int sistemVersion);
-        List<Car> GetBySystemVersionRange(int startSistemVersion, int endSistemVersion);
+        List<Car> GetByMileageRange(double startMileage, double endMileage);
+        List<Car> GetBySystemVersion(int systemVersion);
+        List<Car> GetBySystemVersionRange(int startSystemVersion, int endSystemVersion);
+        List<Car> GetBySystemVersionAndMileage(int systemVersion, double miliage);
     }
 }

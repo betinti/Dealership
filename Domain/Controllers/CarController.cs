@@ -19,7 +19,7 @@ namespace Domain.Controllers
         [HttpPost]
         public IActionResult Create([FromBody] CarDTO car)
             => Ok(new CarDTO().FromModel(_carService.Create(car)));
-        
+
         [HttpPost("{modelId}/{accessoryId}/{ownerId}")]
         public IActionResult CreateWithCreateds([FromBody] CarDTO car, int modelId, int accessoryId, int ownerId)
             => Ok(new CarDTO().FromModel(_carService.CreateWithCreateds(car, modelId, accessoryId, ownerId)));
@@ -48,9 +48,13 @@ namespace Domain.Controllers
         public IActionResult GetBySystemVersion(int systemVersion)
             => Ok(_carService.GetBySystemVersion(systemVersion).Select(c => new CarDTO().FromModel(c)));
 
-        [HttpGet("getBySystemVersionRange/{startSistemVersion}/{endSistemVersion}")]
+        [HttpGet("getBySystemVersionRange/{startSistemVersion}/{endSystemVersion}")]
         public IActionResult GetBySystemVersionRange(int startSystemVersion, int endSystemVersion)
             => Ok(_carService.GetBySystemVersionRange(startSystemVersion, endSystemVersion).Select(c => new CarDTO().FromModel(c)));
+
+        [HttpGet("getBySystemVersionAndMileage/{systemVersion}/{mileage}")]
+        public IActionResult GetBySystemVersionAndMileage(int systemVersion, double mileage)
+            => Ok(_carService.GetBySystemVersionAndMileage(systemVersion, mileage).Select(c => new CarDTO().FromModel(c)));
 
 
         [HttpPut]

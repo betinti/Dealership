@@ -16,11 +16,14 @@ namespace Domain.Repositories
         public IQueryable<Car> GetByMileage(double mileage)
             => GetAllFilled().Where(c => c.Mileage == mileage);
 
-        public IQueryable<Car> GetByMileageRange(double startMiliage, double endMiliage)
-            => GetAllFilled().Where(c => c.Mileage >= startMiliage).Where(c => c.Mileage <= endMiliage);
+        public IQueryable<Car> GetByMileageRange(double startMileage, double endMileage)
+            => GetAllFilled().Where(c => c.Mileage >= startMileage).Where(c => c.Mileage <= endMileage);
 
         public IQueryable<Car> GetBySystemVersion(int systemVersion)
-         => GetAllFilled().Where(c => c.SystemVersion == systemVersion);
+            => GetAllFilled().Where(c => c.SystemVersion == systemVersion);
+
+        public IQueryable<Car> GetBySystemVersionAndMileage(int systemVersion, double mileage)
+            => GetAllFilled().Where(c => c.SystemVersion == systemVersion && c.Mileage == mileage);
 
         public IQueryable<Car> GetBySystemVersionRange(int startSystemVersion, int endSystemVersion)
             => GetAllFilled().Where(c => c.SystemVersion >= startSystemVersion).Where(c => c.SystemVersion <= endSystemVersion);
