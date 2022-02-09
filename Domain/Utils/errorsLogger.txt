@@ -16,3 +16,6 @@ ERROR>>[9/2/22 00:44:29]<< AnyFound
 ERROR>>[quarta-feira, 9 de fevereiro de 2022 00:46:48]<< AnyFound
 ERROR>>[quarta-feira, 09 fevereiro 2022 00:49:27  - 00:49:27]<< AnyFound
 ERROR>>[quarta-feira, 09 fevereiro 2022  00:50:07 ]<< AnyFound
+ERROR>>[quarta-feira, 09 fevereiro 2022  16:36:33 ]<< Cpf or Cnpj is lower than 11 characters -- 
+ERROR>>[quarta-feira, 09 fevereiro 2022  16:54:01 ]<< The duo LicensePlate and Renavam are required -- 
+ERROR>>[quarta-feira, 09 fevereiro 2022  16:54:53 ]<< Car LicensePlate is lower than 10 characters -- 
