@@ -1,6 +1,5 @@
 using Domain.DTO;
 using Domain.Interfaces.Services;
-using Domain.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Domain.Controllers
@@ -28,6 +27,10 @@ namespace Domain.Controllers
         [HttpGet("{id}")]
         public IActionResult Get(int id)
             => Ok(new SaleDTO().FromModel(_saleService.Get(id)));
+
+        [HttpGet("GetFilled/{id}")]
+        public IActionResult GetFilled(int id)
+        => Ok(new SaleDTO().FromModel(_saleService.GetFilled(id)));
 
 
         [HttpPut]

@@ -9,6 +9,5 @@ namespace Domain.Repositories
         public AddressRepository(DealershipContext context) : base(context)
         {
         }
-
     }
 }

@@ -7,5 +7,6 @@ namespace Domain.Interfaces.Services
     {
         Sale NewSaleById(BuyCarDTO buyCar);
         Sale LastSaleFromSellerId(int sellerId);
+        List<Sale> GetBySellerAndMonth(int sellerId, int month);
     }
 }

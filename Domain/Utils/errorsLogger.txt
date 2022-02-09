@@ -1,1 +1,18 @@
 ERROR>>[domingo, 6 de fevereiro de 2022]<< ParameterError
+ERROR>>[terça-feira, 8 de fevereiro de 2022][ID 6]<< NotFound -- 
+ERROR>>[terça-feira, 8 de fevereiro de 2022][ID 4]<< NotFound -- 
+ERROR>>[terça-feira, 8 de fevereiro de 2022][ID 10]<< NotFound -- 
+ERROR>>[terça-feira, 8 de fevereiro de 2022][ID 10]<< NotFound -- 
+ERROR>>[terça-feira, 8 de fevereiro de 2022]<< The value is required at Accessory -- 
+ERROR>>[terça-feira, 8 de fevereiro de 2022]<< The name of an Accessory is required -- 
+ERROR>>[terça-feira, 8 de fevereiro de 2022][ID 5]<< NotFound -- 
+ERROR>>[terça-feira, 8 de fevereiro de 2022]<< Mileage is required in user -- 
+ERROR>>[terça-feira, 8 de fevereiro de 2022][ID 13]<< NotFound -- 
+ERROR>>[quarta-feira, 9 de fevereiro de 2022]<< AnyFound
+ERROR>>[quarta-feira, 9 de fevereiro de 2022]<< AnyFound
+ERROR>>[quarta-feira, 9 de fevereiro de 2022]<< AnyFound
+ERROR>>[9/2/22 00:43:55]<< AnyFound
+ERROR>>[9/2/22 00:44:29]<< AnyFound
+ERROR>>[quarta-feira, 9 de fevereiro de 2022 00:46:48]<< AnyFound
+ERROR>>[quarta-feira, 09 fevereiro 2022 00:49:27  - 00:49:27]<< AnyFound
+ERROR>>[quarta-feira, 09 fevereiro 2022  00:50:07 ]<< AnyFound

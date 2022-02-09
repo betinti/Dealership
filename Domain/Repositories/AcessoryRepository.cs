@@ -9,6 +9,6 @@ namespace Domain.Repositories
         public AccessoryRepository(DealershipContext context) : base(context)
         {
         }
-
     }
+
 }

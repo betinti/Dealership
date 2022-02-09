@@ -47,13 +47,7 @@ namespace Domain.Services
             List<TModel> createds = new List<TModel>();
             try
             {
-                foreach (var model in models)
-                {
-                    var result = Create(model);
-                    if (result == null)
-                        throw new BaseException(ErrorType.CantCreate);
-                    createds.Add(result);
-                }
+                createds = _repository.Create(models).ToList();
             }
             catch (ApplicationException e)
             {
@@ -96,22 +90,13 @@ namespace Domain.Services
         public IEnumerable<TModel> Delete(IEnumerable<TModel> models)
         {
             List<TModel> deleteds = new List<TModel>();
-            var idE = "";
-
             try
             {
-                foreach (var model in models)
-                {
-                    var result = Delete(model);
-                    idE = model.Id.ToString();
-                    if (result == null)
-                        throw new BaseException(ErrorType.CantDelete, idE);
-                    deleteds.Add(result);
-                }
+                deleteds = _repository.Delete(models).ToList();
             }
             catch (ApplicationException e)
             {
-                throw new BaseException(ErrorType.CantDelete, e, idE);
+                throw new BaseException(ErrorType.CantDelete, e);
             }
 
             return deleteds;
@@ -192,27 +177,19 @@ namespace Domain.Services
         public IEnumerable<TModel> Update(IEnumerable<TModel> models)
         {
             List<TModel> updates = new List<TModel>();
-            var idE = "";
             try
             {
-                foreach (var model in models)
-                {
-                    idE = model.Id.ToString();
-                    var result = Update(model);
-                    if (result == null)
-                        throw new BaseException(ErrorType.CantUpdate, idE);
-                    updates.Add(result);
-                }
+                updates = _repository.Update(models).ToList();
             }
             catch (ApplicationException e)
             {
-                throw new BaseException(ErrorType.CantUpdate, e, idE);
+                throw new BaseException(ErrorType.CantUpdate, e);
             }
 
             return updates;
         }
 
-        public TModel Create<TResponse>(TResponse request)
+        public virtual TModel Create<TResponse>(TResponse request)
          where TResponse : BaseDTO<TModel, TResponse>, new()
             => Create(request.ToModel());
 
@@ -231,5 +208,8 @@ namespace Domain.Services
         public IEnumerable<TModel> Delete<TResponse>(IEnumerable<TResponse> models)
          where TResponse : BaseDTO<TModel, TResponse>, new()
             => Delete(models.Select(m => m.ToModel()));
+
+        public virtual TModel GetFilled(int id)
+            => _repository.GetFilled(id);
     }
 }

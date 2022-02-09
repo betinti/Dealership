@@ -9,7 +9,7 @@ namespace Domain.Services
 {
     public class SaleService : BaseService<Sale>, ISaleService
     {
-        private readonly double commissionPercentage = 1.0;
+        private readonly double commissionPercentage = 0.01;
         private readonly new ISaleRepository _saleRepository;
         private readonly new ILazyService _lazyService;
 
@@ -17,6 +17,16 @@ namespace Domain.Services
         {
             _saleRepository = repository;
             _lazyService = lazyService;
+        }
+
+        public List<Sale> GetBySellerAndMonth(int sellerId, int month)
+        {
+            var sales = _saleRepository.GetBySellerAndMonth(sellerId, month).ToList();
+
+            if (sales == null || sales.Count == 0)
+                throw new BaseException(ErrorType.AnyFound);
+
+            return sales;
         }
 
         public Sale LastSaleFromSellerId(int sellerId)

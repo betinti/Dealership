@@ -4,7 +4,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Domain.Repositories
 {
-    public abstract class BaseRepository<TModel> : IBaseRepository<TModel> where TModel : BaseModel, new()
+    public abstract class BaseRepository<TModel> : IBaseRepository<TModel>
+     where TModel : BaseModel, new()
     {
 
         protected readonly DealershipContext _context;
@@ -33,6 +34,14 @@ namespace Domain.Repositories
             return AfterCRUD(model);
         }
 
+        public IEnumerable<TModel> Create(IEnumerable<TModel> models)
+        {
+            foreach (var model in models)
+                this._dbSet.Add(model);
+            this.Commit();
+            return models;
+        }
+
         public TModel Delete(TModel model)
         {
             this._dbSet.Remove(model);
@@ -43,6 +52,8 @@ namespace Domain.Repositories
         public TModel Delete(int id)
          => Delete(Get(id));
 
+
+
         public IQueryable<TModel> Get()
          => this._dbSet;
 
@@ -51,16 +62,35 @@ namespace Domain.Repositories
 
         public TModel Update(TModel model)
         {
-            var entity = Get(model.Id);
-            _dbSet.Update(entity);
+            // var entity = Get(model.Id);
+            _dbSet.Update(model);
 
             return AfterCRUD(model);
+        }
+
+        public IEnumerable<TModel> Update(IEnumerable<TModel> models)
+        {
+            foreach (var model in models)
+                this._dbSet.Update(model);
+            this.Commit();
+            return models;
         }
 
         public virtual void Dispose()
         {
             _context.Dispose();
             GC.SuppressFinalize(this);
+        }
+
+        public virtual TModel GetFilled(int id)
+            => Get(id);
+
+        public IEnumerable<TModel> Delete(IEnumerable<TModel> models)
+        {
+            foreach (var model in models)
+                this._dbSet.Remove(model);
+            this.Commit();
+            return models;
         }
     }
 }

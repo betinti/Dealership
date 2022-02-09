@@ -2,7 +2,6 @@ using Domain.DTO;
 using Domain.Interfaces.Services;
 using Domain.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace Domain.Controllers
 {
@@ -11,9 +10,9 @@ namespace Domain.Controllers
 
         private readonly IUserService _userService;
 
-        public UserController(IUserService _userService)
+        public UserController(IUserService userService)
         {
-            _userService = _userService;
+            _userService = userService;
         }
 
         [HttpPost]
@@ -21,16 +20,22 @@ namespace Domain.Controllers
             => Ok(new UserDTO().FromModel(_userService.Create(user)));
 
 
+        [HttpPost("{addressId}")]
+        public IActionResult CreateWithCreateds([FromBody] UserDTO seller, int addressId)
+            => Ok(new UserDTO().FromModel(_userService.CreateWithCreateds(seller, addressId)));
+
         [HttpGet]
         public IActionResult Get()
-            => Ok(_userService.Get().Select(u => new UserDTO().FromModel(u)).ToList());
-
+            => Ok(_userService.Get());
 
 
         [HttpGet("{id}")]
         public IActionResult Get(int id)
             => Ok(new UserDTO().FromModel(_userService.Get(id)));
 
+        [HttpGet("GetFilled/{id}")]
+        public IActionResult GetFilled(int id)
+            => Ok(new UserDTO().FromModel(_userService.GetFilled(id)));
 
         [HttpPut]
         public IActionResult Update([FromBody] UserDTO user)

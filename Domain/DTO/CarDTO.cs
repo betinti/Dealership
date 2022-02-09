@@ -1,3 +1,5 @@
+using Domain.Enumerations;
+using Domain.Exception;
 using Domain.Models;
 
 namespace Domain.DTO
@@ -6,17 +8,17 @@ namespace Domain.DTO
     {
         public string Chassis { get; set; }
 
-        public ModelDTO Model { get; set; }
+        public ModelDTO? Model { get; set; }
 
         public string Color { get; set; }
 
-        public double Value { get; set; }
+        public double? Value { get; set; }
 
-        public double Mileage { get; set; }
+        public double? Mileage { get; set; }
 
         public AccessoryDTO? Accessory { get; set; }
 
-        public int SistemVersion { get; set; }
+        public int? SystemVersion { get; set; }
 
         public OwnerDTO? Owner { get; set; }
 
@@ -24,42 +26,84 @@ namespace Domain.DTO
 
         public string? Renavam { get; set; }
 
-        public CarDTO FromModel(Car model)
+        public override CarDTO FromModel(Car model)
         {
             if (model == null)
                 return null;
 
-            this.Id = model.Id;
-            this.Chassis = model.Chassis;
-            this.Model = new ModelDTO().FromModel(model.Model);
-            this.Color = model.Color;
-            this.Value = model.Value;
-            this.Mileage = model.Mileage;
-            this.Accessory = new AccessoryDTO().FromModel(model.Accessory);
-            this.SistemVersion = model.SistemVersion;
-            this.Owner = new OwnerDTO().FromModel(model.Owner);
-            this.LicensePlate = model.LicensePlate;
-            this.Renavam = model.Renavam;
+            try
+            {
+                this.Id = model.Id;
+                this.Chassis = model.Chassis;
+                this.Model = new ModelDTO().FromModel(model.Model);
+                this.Color = model.Color;
+                this.Value = model.Value;
+                this.Mileage = model.Mileage;
+                this.Accessory = new AccessoryDTO().FromModel(model.Accessory);
+                this.SystemVersion = model.SystemVersion;
+                this.Owner = new OwnerDTO().FromModel(model.Owner);
+                this.LicensePlate = model.LicensePlate;
+                this.Renavam = model.Renavam;
+            }
+            catch (ApplicationException e)
+            {
+                throw new BaseException(ErrorType.ParseError, e);
+            }
 
             return this;
         }
 
-        public Car ToModel()
+        public override Car ToSimpleModel()
         {
+
+            if (this.Chassis == null)
+                throw new BaseException("Chassis is required in user");
+
+            if (this.Color == null)
+                throw new BaseException("Color is required in user");
+
+            if (!this.Value.HasValue)
+                throw new BaseException("Value is required in user");
+
+            if (!this.Mileage.HasValue)
+                throw new BaseException("Mileage is required in user");
+
+            if (!this.SystemVersion.HasValue)
+                throw new BaseException("Sistem Version is required in user");
+
             return new Car
             {
+                Id = this.Id.HasValue ? this.Id.Value : 0,
                 Chassis = this.Chassis,
-                Model = this.Model.ToModel(),
                 Color = this.Color,
-                Value = this.Value,
-                Mileage = this.Mileage,
-                Accessory = this.Accessory.ToModel(),
-                SistemVersion = this.SistemVersion,
-                Owner = this.Owner.ToModel(),
-                LicensePlate = this.LicensePlate,
-                Renavam = this.Renavam,
+                Value = this.Value.HasValue ? this.Value.Value : 0,
+                Mileage = this.Mileage.HasValue ? this.Mileage.Value : 0,
+                SystemVersion = this.SystemVersion.HasValue ? this.SystemVersion.Value : 0,
             };
+        }
 
+        public override Car ToModel()
+        {
+            var car = ToSimpleModel();
+
+            if ((car.LicensePlate != null && car.Renavam == null) || (car.LicensePlate == null && car.Renavam != null))
+                throw new BaseException("The duo LicensePlate and Renavam are required");
+
+            if (car.LicensePlate != null && car.LicensePlate.Length < 10)
+                throw new BaseException("Car LicensePlate is lower than 10 characters");
+            else if (car.LicensePlate != null && car.LicensePlate.Length > 15)
+                throw new BaseException("Car LicensePlate is bigger than 15 characters");
+
+            if (this.Model == null)
+                throw new BaseException("Model is required in user");
+
+            car.Model = this.Model != null ? this.Model.ToModel() : null;
+            car.Accessory = this.Accessory != null ? this.Accessory.ToModel() : null;
+            car.Owner = this.Owner != null ? this.Owner.ToModel() : null;
+            car.LicensePlate = this.LicensePlate;
+            car.Renavam = this.Renavam;
+
+            return car;
         }
 
     }

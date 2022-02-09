@@ -15,10 +15,7 @@ namespace Domain.Models
 
         [StringLength(10)]
         [MinLength(6)]
-        [Required(ErrorMessage = "Address CEP needs is required")]
         public string CEP { get; set; }
-
-        [Required(ErrorMessage = "Address number needs is required")]
         public int Number { get; set; }
 
         [StringLength(100)]

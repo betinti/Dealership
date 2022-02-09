@@ -12,6 +12,5 @@ namespace Domain.Services
         {
             _accessoryRepository = repository;
         }
-
     }
 }
