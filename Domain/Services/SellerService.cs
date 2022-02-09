@@ -25,9 +25,9 @@ namespace Domain.Services
 
             var lastSaleDate = _lazyService.Get<ISaleService>().LastSaleFromSellerId(seller.Id).BuyDate;
 
-            if (saleDate.Month == lastSaleDate.Month && saleDate.Year == lastSaleDate.Year)
-                seller.MonthlyCommission = seller.MonthlyCommission + (sale.CommissionPercentage * sale.Price);
-            else if (saleDate.Month > lastSaleDate.Month && saleDate.Year == lastSaleDate.Year)
+            if (saleDate.Month == lastSaleDate.Month && saleDate.Year >= lastSaleDate.Year)
+                seller.MonthlyCommission += (sale.CommissionPercentage * sale.Price);
+            else if (saleDate.Month > lastSaleDate.Month && saleDate.Year >= lastSaleDate.Year)
                 seller.MonthlyCommission = sale.CommissionPercentage * sale.Price;
 
 
